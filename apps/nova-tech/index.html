@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nova Tech</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050510;
+    --surface: #0d0d2b;
+    --accent: #00f5ff;
+    --accent2: #7b2fff;
+    --text: #e0e8ff;
+    --muted: #6b7db3;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'Rajdhani', sans-serif; overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(5,5,16,0.85); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0,245,255,0.15);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 60px; height: 70px;
+  }
+  .logo { font-family: 'Orbitron', sans-serif; font-size: 1.4rem; color: var(--accent); letter-spacing: 4px; }
+  .logo span { color: var(--accent2); }
+  .nav-links { display: flex; gap: 40px; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.95rem; letter-spacing: 2px; text-transform: uppercase; transition: color 0.3s; position: relative; }
+  .nav-links a::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:1px; background:var(--accent); transition:width 0.3s; }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-links a:hover::after { width: 100%; }
+
+  /* SECTIONS */
+  section { min-height: 100vh; padding: 120px 60px 80px; }
+
+  /* HOME */
+  #home {
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .grid-bg {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(0,245,255,0.04) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(0,245,255,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridMove 20s linear infinite;
+  }
+  @keyframes gridMove { from{background-position:0 0;} to{background-position:60px 60px;} }
+  .hero-content { position: relative; z-index: 1; max-width: 800px; }
+  .tag { font-size: 0.75rem; letter-spacing: 4px; color: var(--accent); text-transform: uppercase; margin-bottom: 20px; }
+  h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 900; line-height: 1.1; margin-bottom: 24px; }
+  h1 em { font-style: normal; color: var(--accent); }
+  .hero-sub { font-size: 1.2rem; color: var(--muted); max-width: 560px; line-height: 1.7; margin-bottom: 40px; }
+  .btn { display: inline-block; padding: 14px 36px; background: transparent; border: 1px solid var(--accent); color: var(--accent); font-family: 'Rajdhani', sans-serif; font-size: 0.9rem; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: all 0.3s; }
+  .btn:hover { background: var(--accent); color: var(--bg); box-shadow: 0 0 30px rgba(0,245,255,0.4); }
+  .btn-solid { background: var(--accent2); border-color: var(--accent2); color: #fff; margin-left: 16px; }
+  .btn-solid:hover { background: #9b4fff; box-shadow: 0 0 30px rgba(123,47,255,0.5); color: #fff; }
+
+  /* ABOUT */
+  #about { background: var(--surface); }
+  .section-label { font-size: 0.7rem; letter-spacing: 5px; color: var(--accent2); text-transform: uppercase; margin-bottom: 12px; }
+  h2 { font-family: 'Orbitron', sans-serif; font-size: clamp(1.8rem, 4vw, 3rem); margin-bottom: 30px; }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-top: 40px; }
+  .about-text p { color: var(--muted); line-height: 1.9; font-size: 1.05rem; margin-bottom: 20px; }
+  .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .stat-card { border: 1px solid rgba(0,245,255,0.15); padding: 28px; background: rgba(0,245,255,0.03); }
+  .stat-card .num { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; color: var(--accent); font-weight: 700; }
+  .stat-card .label { color: var(--muted); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; }
+
+  /* SERVICES */
+  #services { }
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 50px; }
+  .service-card { border: 1px solid rgba(0,245,255,0.1); padding: 40px 32px; background: var(--surface); transition: all 0.4s; position: relative; overflow: hidden; }
+  .service-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background: linear-gradient(90deg, var(--accent2), var(--accent)); transform: scaleX(0); transition: transform 0.4s; }
+  .service-card:hover { border-color: rgba(0,245,255,0.35); transform: translateY(-6px); }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-icon { font-size: 2rem; margin-bottom: 20px; }
+  .service-card h3 { font-family: 'Orbitron', sans-serif; font-size: 1rem; margin-bottom: 16px; letter-spacing: 2px; }
+  .service-card p { color: var(--muted); font-size: 0.95rem; line-height: 1.8; }
+
+  /* CONTACT */
+  #contact { background: var(--surface); }
+  .contact-wrap { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; margin-top: 50px; }
+  .contact-info h3 { font-family: 'Orbitron', sans-serif; font-size: 1.1rem; margin-bottom: 20px; }
+  .contact-info p { color: var(--muted); line-height: 1.9; margin-bottom: 32px; }
+  .contact-detail { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; color: var(--muted); font-size: 0.95rem; }
+  .contact-detail span:first-child { color: var(--accent); font-size: 1.2rem; }
+  .form-group { margin-bottom: 24px; }
+  .form-group label { display: block; font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+  .form-group input, .form-group textarea {
+    width: 100%; background: rgba(0,0,0,0.4); border: 1px solid rgba(0,245,255,0.15);
+    color: var(--text); font-family: 'Rajdhani', sans-serif; font-size: 1rem;
+    padding: 14px 18px; outline: none; transition: border-color 0.3s;
+  }
+  .form-group input:focus, .form-group textarea:focus { border-color: var(--accent); }
+  .form-group textarea { resize: vertical; min-height: 140px; }
+
+  footer { text-align: center; padding: 30px; border-top: 1px solid rgba(0,245,255,0.1); color: var(--muted); font-size: 0.85rem; letter-spacing: 2px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">NOVA<span>TECH</span></div>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#contact">Contact Us</a></li>
+  </ul>
+</nav>
+
+<section id="home">
+  <div class="grid-bg"></div>
+  <div class="hero-content">
+    <div class="tag">// Next Generation Technology</div>
+    <h1>Engineer The <em>Future</em><br>Today</h1>
+    <p class="hero-sub">We build cutting-edge software solutions that push the boundaries of what's possible. Innovation. Precision. Performance.</p>
+    <a href="#services" class="btn">Explore Services</a>
+    <a href="#contact" class="btn btn-solid">Get In Touch</a>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-label">// About Us</div>
+  <h2>Built for the<br>Digital Age</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>Nova Tech was founded on a singular mission: to give businesses the technological edge they need to thrive in an accelerating world. We combine deep expertise with forward-thinking vision.</p>
+      <p>Our team of engineers, designers, and strategists work collaboratively to deliver solutions that aren't just functional — they're transformative.</p>
+      <a href="#contact" class="btn">Work With Us</a>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num">12+</div><div class="label">Years Active</div></div>
+      <div class="stat-card"><div class="num">340+</div><div class="label">Projects</div></div>
+      <div class="stat-card"><div class="num">98%</div><div class="label">Client Retention</div></div>
+      <div class="stat-card"><div class="num">40+</div><div class="label">Engineers</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="section-label">// What We Do</div>
+  <h2>Our Services</h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">⚡</div>
+      <h3>Cloud Architecture</h3>
+      <p>Scalable, secure cloud infrastructure designed for performance and built to grow with your business needs.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🤖</div>
+      <h3>AI & Machine Learning</h3>
+      <p>Custom AI models and intelligent automation pipelines that turn raw data into strategic insight.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔐</div>
+      <h3>Cybersecurity</h3>
+      <p>End-to-end security audits, penetration testing, and zero-trust architecture implementation.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📱</div>
+      <h3>App Development</h3>
+      <p>Native and cross-platform mobile applications with exceptional UX and bulletproof reliability.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🌐</div>
+      <h3>Web Platforms</h3>
+      <p>High-performance web platforms built with modern stacks and optimized for conversion.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📊</div>
+      <h3>Data Analytics</h3>
+      <p>Real-time dashboards and analytics systems that surface the metrics that matter most.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-label">// Get In Touch</div>
+  <h2>Let's Build<br>Something Great</h2>
+  <div class="contact-wrap">
+    <div class="contact-info">
+      <h3>Connect With Us</h3>
+      <p>Have a project in mind? We'd love to hear about it. Send us a message and we'll get back to you within 24 hours.</p>
+      <div class="contact-detail"><span>📍</span><span>1200 Innovation Drive, San Francisco, CA</span></div>
+      <div class="contact-detail"><span>📧</span><span>hello@novatech.io</span></div>
+      <div class="contact-detail"><span>📞</span><span>+1 (415) 000-0000</span></div>
+    </div>
+    <div class="contact-form">
+      <div class="form-group"><label>Name</label><input type="text" placeholder="John Doe"></div>
+      <div class="form-group"><label>Email</label><input type="email" placeholder="john@company.com"></div>
+      <div class="form-group"><label>Message</label><textarea placeholder="Tell us about your project..."></textarea></div>
+      <a href="#" class="btn btn-solid">Send Message</a>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 Nova Tech — All Systems Operational</footer>
+
+</body>
+</html>

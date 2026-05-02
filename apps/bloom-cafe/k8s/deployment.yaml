@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
         - name: bloom-cafe
-          image: ghcr.io/YOUR_ORG/bloom-cafe:dev-latest
+          image: ghcr.io/Kgomotso1995/bloom-cafe:staging-latest
           imagePullPolicy: Always
           ports:
             - name: http

@@ -1,14 +1,7 @@
 #!/bin/bash
-# Apply all ArgoCD applications
+# Apply ArgoCD applications for staging and production (no dev since we don't build dev images)
 
 echo "Applying ArgoCD applications..."
-
-# Dev applications (auto-sync)
-kubectl apply -f argocd/nova-tech-dev.yaml
-kubectl apply -f argocd/bloom-cafe-dev.yaml
-kubectl apply -f argocd/arclight_agency-dev.yaml
-kubectl apply -f argocd/verdant_homes-dev.yaml
-kubectl apply -f argocd/zenfit_studio-dev.yaml
 
 # Staging applications (auto-sync)
 kubectl apply -f argocd/nova-tech-staging.yaml
@@ -26,5 +19,5 @@ kubectl apply -f argocd/zenfit_studio-prod.yaml
 
 echo "All ArgoCD applications applied!"
 echo ""
-echo "Check status with: argocd app list"
-echo "Sync production apps manually when ready"
+echo "Staging apps will auto-sync when you merge dev→staging"
+echo "Production apps require manual sync after staging→main merge"

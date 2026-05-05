@@ -42,7 +42,7 @@ jobs:
       - name: Compute image tags
         shell: bash
         run: |
-          IMAGE_NAME=ghcr.io/${GITHUB_REPOSITORY_OWNER}/${{ matrix.name }}
+          IMAGE_NAME=$(echo "ghcr.io/${GITHUB_REPOSITORY_OWNER}/${{ matrix.name }}" | tr '[:upper:]' '[:lower:]')
           TAGS="${IMAGE_NAME}:${GITHUB_REF_NAME},${IMAGE_NAME}:${GITHUB_SHA}"
           if [ "${GITHUB_REF_NAME}" = "main" ]; then
             TAGS="${TAGS},${IMAGE_NAME}:latest"

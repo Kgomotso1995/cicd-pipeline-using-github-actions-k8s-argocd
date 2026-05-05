@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: bloom-cafe
-  namespace: sites-staging
+  namespace: staging
   labels:
     app: bloom-cafe
     env: dev

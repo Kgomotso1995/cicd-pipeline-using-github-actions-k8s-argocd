@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: verdant-homes
-  namespace: sites-staging
+  namespace: staging
   labels:
     app: verdant-homes
     env: dev

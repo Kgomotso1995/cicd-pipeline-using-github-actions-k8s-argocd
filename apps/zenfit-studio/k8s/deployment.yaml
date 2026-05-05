@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: zenfit-studio
-  namespace: sites-staging
+  namespace: staging
   labels:
     app: zenfit-studio
     env: dev

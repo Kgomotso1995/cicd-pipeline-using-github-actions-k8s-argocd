@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
         - name: arclight-agency
-          image: ghcr.io/YOUR_ORG/arclight-agency:dev-latest
+          image: ghcr.io/Kgomotso1995/arclight-agency:staging-latest
           imagePullPolicy: Always
           ports:
             - name: http

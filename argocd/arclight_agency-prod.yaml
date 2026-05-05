@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: arclight_agency-prod
+  namespace: argocd
+  labels:
+    env: prod
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Kgomotso1995/cicd-pipeline-using-github-actions-k8s-argocd
+    targetRevision: main
+    path: apps/arclight_agency/k8s
+    directory:
+      include: deployment-main.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: production
+  syncPolicy:
+    automated: null  # Manual sync for production
+ECHO is off.
+ECHO is off.
+    syncOptions:
+      - CreateNamespace=true

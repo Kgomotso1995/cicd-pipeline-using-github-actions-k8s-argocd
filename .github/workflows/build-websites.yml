@@ -3,6 +3,7 @@ name: Build and Push Website Images
 on:
   push:
     branches:
+      - dev
       - staging
       - main
 
@@ -14,26 +15,25 @@ jobs:
       packages: write
 
     strategy:
-      fail-fast: false
       matrix:
         include:
           - name: nova-tech
-            path: apps/nova-tech
+            path: apps/nova_tech
           - name: bloom-cafe
-            path: apps/bloom-cafe
+            path: apps/bloom_cafe
           - name: zenfit-studio
-            path: apps/zenfit-studio
+            path: apps/zenfit_studio
           - name: arclight-agency
-            path: apps/arclight-agency
+            path: apps/arclight_agency
           - name: verdant-homes
-            path: apps/verdant-homes
+            path: apps/verdant_homes
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v4
+        uses: docker/login-action@v5
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -42,7 +42,7 @@ jobs:
       - name: Compute image tags
         shell: bash
         run: |
-          IMAGE_NAME=$(echo "ghcr.io/${GITHUB_REPOSITORY_OWNER}/${{ matrix.name }}" | tr '[:upper:]' '[:lower:]')
+          IMAGE_NAME=ghcr.io/${GITHUB_REPOSITORY_OWNER}/${{ matrix.name }}
           TAGS="${IMAGE_NAME}:${GITHUB_REF_NAME},${IMAGE_NAME}:${GITHUB_SHA}"
           if [ "${GITHUB_REF_NAME}" = "main" ]; then
             TAGS="${TAGS},${IMAGE_NAME}:latest"
@@ -51,7 +51,7 @@ jobs:
           echo "IMAGE_TAGS=${TAGS}" >> $GITHUB_ENV
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         with:
           context: ${{ matrix.path }}
           file: ./static-site.Dockerfile

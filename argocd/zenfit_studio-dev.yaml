@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: zenfit_studio-dev
+  namespace: argocd
+  labels:
+    env: dev
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Kgomotso1995/cicd-pipeline-using-github-actions-k8s-argocd
+    targetRevision: dev
+    path: apps/zenfit_studio/k8s
+    directory:
+      include: deployment-dev.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+          prune: true
+          selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

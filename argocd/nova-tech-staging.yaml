@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nova-tech-staging
+  namespace: argocd
+  labels:
+    env: staging
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Kgomotso1995/cicd-pipeline-using-github-actions-k8s-argocd
+    targetRevision: staging
+    path: apps/nova-tech/k8s
+    directory:
+      include: deployment-staging.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: staging
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

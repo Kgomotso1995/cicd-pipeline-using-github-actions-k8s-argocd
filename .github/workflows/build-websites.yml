@@ -17,15 +17,15 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - name: nova_tech
+          - name: nova-tech
             path: apps/nova-tech
-          - name: bloom_cafe
+          - name: bloom-cafe
             path: apps/bloom-cafe
-          - name: zenfit_studio
+          - name: zenfit-studio
             path: apps/zenfit-studio
-          - name: arclight_agency
+          - name: arclight-agency
             path: apps/arclight-agency
-          - name: verdant_homes
+          - name: verdant-homes
             path: apps/verdant-homes
 
     steps:

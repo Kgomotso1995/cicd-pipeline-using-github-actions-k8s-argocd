@@ -14,18 +14,19 @@ jobs:
       packages: write
 
     strategy:
+      fail-fast: false
       matrix:
         include:
           - name: nova-tech
-            path: apps/nova_tech
+            path: apps/nova-tech
           - name: bloom-cafe
-            path: apps/bloom_cafe
+            path: apps/bloom-cafe
           - name: zenfit-studio
-            path: apps/zenfit_studio
+            path: apps/zenfit-studio
           - name: arclight-agency
-            path: apps/arclight_agency
+            path: apps/arclight-agency
           - name: verdant-homes
-            path: apps/verdant_homes
+            path: apps/verdant-homes
 
     steps:
       - name: Checkout repository

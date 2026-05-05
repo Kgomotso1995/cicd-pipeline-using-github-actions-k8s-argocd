@@ -1,22 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: arclight-agency-staging
+  name: bloom-cafe-prod
   namespace: argocd
   labels:
-    env: staging
+    env: production
 spec:
   project: default
   source:
     repoURL: https://github.com/Kgomotso1995/cicd-pipeline-using-github-actions-k8s-argocd
-    targetRevision: staging
-    path: apps/arclight-agency/k8s
+    targetRevision: main
+    path: apps/bloom-cafe/k8s
   destination:
     server: https://kubernetes.default.svc
-    namespace: sites-staging
+    namespace: sites-prod
   syncPolicy:
     automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
+      prune: false  # Manual sync for production
+      selfHeal: false

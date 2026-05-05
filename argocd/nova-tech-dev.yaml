@@ -1,19 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: arclight-agency-staging
+  name: nova-tech-dev
   namespace: argocd
   labels:
-    env: staging
+    env: dev
 spec:
   project: default
   source:
     repoURL: https://github.com/Kgomotso1995/cicd-pipeline-using-github-actions-k8s-argocd
-    targetRevision: staging
-    path: apps/arclight-agency/k8s
+    targetRevision: dev
+    path: apps/nova-tech/k8s
   destination:
     server: https://kubernetes.default.svc
-    namespace: sites-staging
+    namespace: sites-dev
   syncPolicy:
     automated:
       prune: true

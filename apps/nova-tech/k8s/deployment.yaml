@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
         - name: nova-tech
-          image: ghcr.io/Kgomotso1995/nova-tech:staging-latest
+          image: ghcr.io/kgomotso1995/nova_tech:staging
           imagePullPolicy: Always
           ports:
             - name: http

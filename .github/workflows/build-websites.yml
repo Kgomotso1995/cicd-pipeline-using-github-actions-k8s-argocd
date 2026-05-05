@@ -1,0 +1,59 @@
+name: Build and Push Website Images
+
+on:
+  push:
+    branches:
+      - dev
+      - staging
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    strategy:
+      matrix:
+        include:
+          - name: nova-tech
+            path: apps/nova_tech
+          - name: bloom-cafe
+            path: apps/bloom_cafe
+          - name: zenfit-studio
+            path: apps/zenfit_studio
+          - name: arclight-agency
+            path: apps/arclight_agency
+          - name: verdant-homes
+            path: apps/verdant_homes
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v5
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Compute image tags
+        shell: bash
+        run: |
+          IMAGE_NAME=ghcr.io/${GITHUB_REPOSITORY_OWNER}/${{ matrix.name }}
+          TAGS="${IMAGE_NAME}:${GITHUB_REF_NAME},${IMAGE_NAME}:${GITHUB_SHA}"
+          if [ "${GITHUB_REF_NAME}" = "main" ]; then
+            TAGS="${TAGS},${IMAGE_NAME}:latest"
+          fi
+          echo "IMAGE_NAME=${IMAGE_NAME}" >> $GITHUB_ENV
+          echo "IMAGE_TAGS=${TAGS}" >> $GITHUB_ENV
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: ${{ matrix.path }}
+          file: ./static-site.Dockerfile
+          push: true
+          tags: ${{ env.IMAGE_TAGS }}

@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: verdant-homes
-  namespace: sites-staging
+  namespace: staging
   labels:
     app: verdant-homes
     env: dev
@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
         - name: verdant-homes
-          image: ghcr.io/Kgomotso1995/verdant-homes:staging-latest
+          image: ghcr.io/kgomotso1995/verdant_homes:staging
           imagePullPolicy: Always
           ports:
             - name: http

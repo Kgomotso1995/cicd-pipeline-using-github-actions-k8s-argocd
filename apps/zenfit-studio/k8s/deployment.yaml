@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: zenfit-studio
-  namespace: sites-staging
+  namespace: staging
   labels:
     app: zenfit-studio
     env: dev
@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
         - name: zenfit-studio
-          image: ghcr.io/Kgomotso1995/zenfit-studio:staging-latest
+          image: ghcr.io/kgomotso1995/zenfit_studio:staging
           imagePullPolicy: Always
           ports:
             - name: http

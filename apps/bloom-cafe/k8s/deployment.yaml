@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: bloom-cafe
-  namespace: sites-staging
+  namespace: staging
   labels:
     app: bloom-cafe
     env: dev
@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
         - name: bloom-cafe
-          image: ghcr.io/Kgomotso1995/bloom-cafe:staging-latest
+          image: ghcr.io/kgomotso1995/bloom_cafe:staging
           imagePullPolicy: Always
           ports:
             - name: http

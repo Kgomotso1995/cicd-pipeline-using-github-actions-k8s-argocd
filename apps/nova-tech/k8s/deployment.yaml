@@ -22,6 +22,8 @@ spec:
         app: nova-tech
         env: dev
     spec:
+      imagePullSecrets:
+        - name: ghcr-secret
       containers:
         - name: nova-tech
           image: ghcr.io/kgomotso1995/nova_tech:staging

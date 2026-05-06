@@ -22,6 +22,8 @@ spec:
         app: arclight-agency
         env: dev
     spec:
+      imagePullSecrets:
+        - name: ghcr-secret
       containers:
         - name: arclight-agency
           image: ghcr.io/kgomotso1995/arclight_agency:staging

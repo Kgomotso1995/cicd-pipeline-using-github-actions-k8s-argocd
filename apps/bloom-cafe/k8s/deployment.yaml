@@ -22,6 +22,8 @@ spec:
         app: bloom-cafe
         env: dev
     spec:
+      imagePullSecrets:
+        - name: ghcr-secret
       containers:
         - name: bloom-cafe
           image: ghcr.io/kgomotso1995/bloom_cafe:staging

@@ -1,3 +1,3 @@
-FROM nginx:alpine
-COPY . /usr/share/nginx/html
+FROM nginxinc/nginx-unprivileged:latest
+COPY index.html /usr/share/nginx/html/
 EXPOSE 80

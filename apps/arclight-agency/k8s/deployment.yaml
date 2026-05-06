@@ -3,23 +3,35 @@ kind: Deployment
 metadata:
   name: arclight-agency
   namespace: staging
+  labels:
+    app: arclight-agency
+    env: dev
+
 spec:
   replicas: 2
+
   selector:
     matchLabels:
       app: arclight-agency
+
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
 
   template:
     metadata:
       labels:
         app: arclight-agency
+        env: dev
 
     spec:
       imagePullSecrets:
         - name: ghcr-secret
 
       securityContext:
-        fsGroup: 101   # 🔑 critical
+        fsGroup: 101
 
       containers:
         - name: arclight-agency
@@ -32,17 +44,21 @@ spec:
             allowPrivilegeEscalation: false
 
           ports:
-            - containerPort: 8080   # 🔥 FIXED
+            - containerPort: 8080
 
           livenessProbe:
             httpGet:
               path: /
               port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 30
 
           readinessProbe:
             httpGet:
               path: /
               port: 8080
+            initialDelaySeconds: 3
+            periodSeconds: 10
 
           volumeMounts:
             - name: nginx-cache

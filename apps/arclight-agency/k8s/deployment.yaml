@@ -46,19 +46,33 @@ spec:
           ports:
             - containerPort: 8080
 
-          livenessProbe:
+          # 🚀 FIX: ensures pod is fully started before probes begin
+          startupProbe:
             httpGet:
               path: /
               port: 8080
-            initialDelaySeconds: 5
-            periodSeconds: 30
+            failureThreshold: 30
+            periodSeconds: 5
 
+          # 👀 controls traffic readiness only
           readinessProbe:
             httpGet:
               path: /
               port: 8080
-            initialDelaySeconds: 3
+            initialDelaySeconds: 10
             periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 6
+
+          # ❤️ checks if container is alive (ONLY after startupProbe passes)
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 20
+            timeoutSeconds: 5
+            failureThreshold: 3
 
           volumeMounts:
             - name: nginx-cache

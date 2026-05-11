@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: production
 
 resources:
-  - ../../base
+  - ../../k8s
 
 images:
   - name: ghcr.io/kgomotso1995/arclight_agency

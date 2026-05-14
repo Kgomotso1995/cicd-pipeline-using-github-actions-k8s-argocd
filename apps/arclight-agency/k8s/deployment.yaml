@@ -29,7 +29,7 @@ spec:
 
       securityContext:
         fsGroup: 101
-
       containers:
         - name: arclight-agency
-          image: ghcr.io/kgomotso1995/arclight_agency
+          image: ghcr.io/kgomotso1995/arclight_agency:latest
+          imagePullPolicy: Always

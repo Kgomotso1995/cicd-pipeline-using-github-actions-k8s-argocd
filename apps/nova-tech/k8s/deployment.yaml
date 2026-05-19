@@ -2,10 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nova-tech
-  namespace: staging
   labels:
     app: nova-tech
-    env: dev
 
 spec:
   replicas: 2
@@ -24,7 +22,6 @@ spec:
     metadata:
       labels:
         app: nova-tech
-        env: dev
 
     spec:
       imagePullSecrets:
@@ -32,60 +29,7 @@ spec:
 
       securityContext:
         fsGroup: 101
-
       containers:
         - name: nova-tech
-          image: ghcr.io/kgomotso1995/nova_tech:staging
+          image: ghcr.io/kgomotso1995/nova-tech:latest
           imagePullPolicy: Always
-
-          securityContext:
-            runAsNonRoot: true
-            runAsUser: 101
-            allowPrivilegeEscalation: false
-
-          ports:
-            - containerPort: 80
-
-          # 🚀 FIX: ensures pod is fully started before probes begin
-          startupProbe:
-            httpGet:
-              path: /
-              port: 80
-            failureThreshold: 30
-            periodSeconds: 5
-
-          # 👀 controls traffic readiness only
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 80
-            initialDelaySeconds: 10
-            periodSeconds: 10
-            timeoutSeconds: 5
-            failureThreshold: 6
-
-          # ❤️ checks if container is alive (ONLY after startupProbe passes)
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 80
-            initialDelaySeconds: 30
-            periodSeconds: 20
-            timeoutSeconds: 5
-            failureThreshold: 3
-
-          volumeMounts:
-            - name: nginx-cache
-              mountPath: /var/cache/nginx
-            - name: nginx-run
-              mountPath: /var/run
-            - name: nginx-tmp
-              mountPath: /tmp
-
-      volumes:
-        - name: nginx-cache
-          emptyDir: {}
-        - name: nginx-run
-          emptyDir: {}
-        - name: nginx-tmp
-          emptyDir: {}

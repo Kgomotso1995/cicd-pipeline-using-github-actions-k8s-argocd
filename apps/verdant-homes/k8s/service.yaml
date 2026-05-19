@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: verdant-homes-service
+  labels:
+    app: verdant-homes
+
+spec:
+  type: ClusterIP
+
+  selector:
+    app: verdant-homes
+
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 80

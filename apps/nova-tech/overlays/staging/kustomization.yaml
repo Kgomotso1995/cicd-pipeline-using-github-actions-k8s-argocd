@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+
+resources:
+  - ../../k8s
+
+images:
+  - name: ghcr.io/kgomotso1995/nova-tech
+    newTag: staging
+
+commonLabels:
+  env: staging

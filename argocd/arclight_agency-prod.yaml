@@ -6,7 +6,7 @@ metadata:
   labels:
     env: production
 spec:
-  project: default
+  project: cicd-pipeline-using-github-actions-k8s-argocd
   source:
     repoURL: https://github.com/Kgomotso1995/cicd-pipeline-using-github-actions-k8s-argocd
     targetRevision: main

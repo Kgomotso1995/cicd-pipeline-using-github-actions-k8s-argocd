@@ -6,7 +6,7 @@ metadata:
   labels:
     env: prod
 spec:
-  project: default
+  project: cicd-pipeline-using-github-actions-k8s-argocd
   source:
     repoURL: https://github.com/Kgomotso1995/cicd-pipeline-using-github-actions-k8s-argocd
     targetRevision: main
@@ -17,8 +17,6 @@ spec:
     server: https://kubernetes.default.svc
     namespace: production
   syncPolicy:
-    automated: null  # Manual sync for production
-ECHO is off.
-ECHO is off.
-    syncOptions:
-      - CreateNamespace=true
+    automated:
+      prune: false  # Manual sync for production
+      selfHeal: false
